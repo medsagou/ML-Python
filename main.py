@@ -5,22 +5,27 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import r2_score, mean_squared_error, accuracy_score
 
 # Charger les données
-data = pd.read_excel('./data2.xlsx')
+data = pd.read_excel("./data2.xlsx")
 data
 # Effectuer One-Hot Encoding
-data.columns = data.columns.str.strip() # pour supprimer s'il y a des cases vides
+data.columns = data.columns.str.strip()  # pour supprimer s'il y a des cases vides
 
-data = pd.get_dummies(data, columns=['zone'])
+data = pd.get_dummies(data, columns=["zone"])
 data
 
 # Diviser les données en ensembles d'entraînement et de test
-X = data.drop(['Nomre de départ'], axis=1)
-y_regression = data['Nomre de départ']
-y_classification = data.drop(['Nomre de départ'], axis=1)
+X = data.drop(["Nomre de départ"], axis=1)
+y_regression = data["Nomre de départ"]
+y_classification = data.drop(["Nomre de départ"], axis=1)
 
-X_train, X_test, y_regression_train, y_regression_test, y_classification_train, y_classification_test = train_test_split(
-    X, y_regression, y_classification, test_size=0.2, random_state=42
-)
+(
+    X_train,
+    X_test,
+    y_regression_train,
+    y_regression_test,
+    y_classification_train,
+    y_classification_test,
+) = train_test_split(X, y_regression, y_classification, test_size=0.2, random_state=42)
 
 # Entraîner le modèle de régression pour prédire le nombre de départs
 regression_model = LinearRegression()
@@ -56,8 +61,8 @@ zone_B = 1
 zone_C = 0
 zone_D = 1
 nouveaux_departs = regression_model.predict([[zone_A, zone_B, zone_C, zone_D]])
-nouveau_type_zone = classification_model.predict([[zone_A, zone_B, zone_C,zone_D]])
+nouveau_type_zone = classification_model.predict([[zone_A, zone_B, zone_C, zone_D]])
 
 print(f"Prévision Départs 2022 : {nouveaux_departs}")
 print(f"Prévision Type de Fonctionnement : {nouveau_type_zone}")
-#--------------------------------
+# --------------------------------yy
